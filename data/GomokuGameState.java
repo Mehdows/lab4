@@ -1,4 +1,4 @@
-package data;
+package lab4.data;
 
 public class GomokuGameState {
 	package lab4.data;

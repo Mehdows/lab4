@@ -1,4 +1,4 @@
-package data;
+package lab4.data;
 
 public class GameGrid {
 	package lab4.data;
