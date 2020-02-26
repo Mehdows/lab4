@@ -4,7 +4,7 @@ import java.util.Observable;
 
 
 /**
- * @author arthur Andersson
+ * @author Arthur Andersson
  */
 /**
 

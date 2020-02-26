@@ -17,15 +17,15 @@ import lab4.client.GomokuClient;
 public class GomokuGameState extends Observable implements Observer{
 
    // Game variables
-	private final int DEFAULT_SIZE = 15;
-	private GameGrid gameGrid;
+	public final int DEFAULT_SIZE = 15;
+	private static GameGrid gameGrid;
 	
     //Possible game states
-	private final int NOT_STARTED = 0;
+	public final int NOT_STARTED = 0;
 	private final int MY_TURN = 1;
 	private final int OTHER_TURN = 2;
 	private final int FINNISHED = 3;
-	private int currentState;
+	public int currentState;
 	
 	private GomokuClient client;
 	
@@ -60,7 +60,7 @@ public class GomokuGameState extends Observable implements Observer{
 	 * @return the game grid
 	 */
 
-	public GameGrid getGameGrid(){
+	public static GameGrid getGameGrid(){
 		return gameGrid;
 	}
 	/**
@@ -181,10 +181,4 @@ public class GomokuGameState extends Observable implements Observer{
 		setChanged();
 		notifyObservers();	
 	}	
-}
-
-@Override
-public void update(Observable o, Object arg) {
-	// TODO Auto-generated method stub
-	
 }

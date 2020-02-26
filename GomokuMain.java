@@ -27,7 +27,7 @@ public class GomokuMain {
 			GomokuClient client = new GomokuClient(portStandard);
 		}
 		
-		GomokuGameState gameState = new GomokuGameState();
+		GomokuGameState gameState = new GomokuGameState(client);
 		GomokuGUI gui = new GomokuGUI(gameState, client);
 		
 	}
