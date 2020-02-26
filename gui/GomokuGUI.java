@@ -57,7 +57,7 @@ public class GomokuGUI implements Observer{
 		disconnectButton = new JButton();
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(g.DEFAULT_SIZE*GamePanel.UNIT_SIZE, gamestate.DEFAULT_SIZE*GamePanel.UNIT_SIZE);
+		frame.setSize(g.DEFAULT_SIZE*GamePanel.UNIT_SIZE+100, gamestate.DEFAULT_SIZE*GamePanel.UNIT_SIZE+100);
 		frame.setTitle("Gomoku");
 		frame.setVisible(true);
 		frame.setResizable(false);
@@ -96,12 +96,19 @@ public class GomokuGUI implements Observer{
 		
 		Box b = Box.createHorizontalBox();
 		Box b2 = Box.createHorizontalBox();
+		Box b3 = Box.createVerticalBox();
 		
 		b.add(connectButton);
 		b.add(newGameButton);
 		b.add(disconnectButton);
 		
+		b2.add(messageLabel);
 		
+		b3.add(gameGridPanel);
+		b3.add(b);
+		b3.add(b2);
+		
+		frame.add(b3);
 		
 		
 	}

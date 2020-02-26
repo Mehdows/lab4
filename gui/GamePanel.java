@@ -62,25 +62,34 @@ public class GamePanel extends JPanel implements Observer{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
-		for(int x = grid.getSize(); x > 0; x--) {
-			for (int y = grid.getSize(); y > 0; y--)
+		for(int x = grid.getSize()-1; x >= 0; x--) {
+			for (int y = grid.getSize()-1; y >= 0; y--) {
 				paintRectangle(g, x, y, colorGrid);
+				
+				if(grid.getLocation(x, y) == GameGrid.ME) {
+					paintCross(g, x, y, colorCross);
+				}
+				if(grid.getLocation(x, y) == GameGrid.OTHER) {
+					paintCircle(g, x, y, colorCross);
+				}
+		
+			}
 		}
 	}
 	
 	private void paintRectangle(Graphics g, int x, int y, Color c) {
 		
 		g.setColor(c);
-		g.drawRect(x, y, UNIT_SIZE, UNIT_SIZE);
+		g.drawRect(x*UNIT_SIZE, y*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
 		
 	}
 	private void paintCircle(Graphics g, int x, int y, Color c) {
 		g.setColor(c);
-		g.drawOval(x, y, UNIT_SIZE, UNIT_SIZE);
+		g.drawOval(x*UNIT_SIZE, y*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
 	}
 	private void paintCross(Graphics g, int x, int y, Color c) {
 		g.setColor(c);
-		g.drawLine(x, y, x + UNIT_SIZE, y + UNIT_SIZE);
-		g.drawLine(x, y, x + UNIT_SIZE, y + UNIT_SIZE);
+		g.drawLine(x*UNIT_SIZE, y*UNIT_SIZE, x + UNIT_SIZE, y + UNIT_SIZE);
+		g.drawLine(x*UNIT_SIZE, y*UNIT_SIZE, x + UNIT_SIZE, y + UNIT_SIZE);
 	}
 }
