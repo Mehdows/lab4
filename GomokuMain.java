@@ -13,23 +13,23 @@ import lab4.gui.GomokuGUI;
 public class GomokuMain {
 
 	
-	static GomokuClient client;
 	
 	public static void main(String[] args) {
-		/*
-		int portStandard = 4000;
 		
+		int port = 6997;
 		if (args.length == 1) {
-			int port = Integer.parseInt(args[0]);
-			GomokuClient client = new GomokuClient(port);
+			port = Integer.parseInt(args[0]);
 		}
-		else {
-			GomokuClient client = new GomokuClient(portStandard);
-		}
-		*/
-		GomokuClient client = new GomokuClient(4069);
+		
+		
+		GomokuClient client = new GomokuClient(port);
 		GomokuGameState gameState = new GomokuGameState(client);
 		GomokuGUI gui = new GomokuGUI(gameState, client);
+		/*
+		GomokuClient client2 = new GomokuClient(7000);
+		GomokuGameState gameState2 = new GomokuGameState(client2);
+		GomokuGUI gui2 = new GomokuGUI(gameState2, client2);
+		*/
 		
 	}
 

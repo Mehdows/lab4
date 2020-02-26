@@ -52,9 +52,9 @@ public class GomokuGUI implements Observer{
 		
 		frame = new JFrame();
 		messageLabel = new JLabel();
-		connectButton = new JButton();
-		newGameButton = new JButton();
-		disconnectButton = new JButton();
+		connectButton = new JButton("Connect");
+		newGameButton = new JButton("New Game");
+		disconnectButton = new JButton("Disconnect");
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(g.DEFAULT_SIZE*GamePanel.UNIT_SIZE+100, gamestate.DEFAULT_SIZE*GamePanel.UNIT_SIZE+100);
@@ -65,35 +65,43 @@ public class GomokuGUI implements Observer{
 		GamePanel gameGridPanel = new GamePanel(GomokuGameState.getGameGrid());
 		MouseAdapter mouseListener = new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				gamestate.move(e.getX(), e.getY());
+				int[] xy = gameGridPanel.getGridPosition(e.getX(), e.getY());
+				gamestate.move(xy[0], xy[1]);
 			}
 		};
+		
 		gameGridPanel.addMouseListener(mouseListener);
 		
 		if(( gamestate.currentState == gamestate.NOT_STARTED)) {
 			newGameButton.setEnabled(false);
 			disconnectButton.setEnabled(false);
 		}
-		newGameButton.addActionListener(new ActionListener() {
+		disconnectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String input = e.getActionCommand();
 				if(input.equals("Disconnect")) {
 					gamestate.disconnect();
-					messageLabel.setText("You've ben disconnected");
 				}
 			}
 		});
 		
 		connectButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				String buttonInput = e.getActionCommand();
-				if(buttonInput.equals("New Game")) {
-					gamestate.newGame();
-					messageLabel.setText("A new game has started");
+				String input = e.getActionCommand();
+				if(input.equals("Connect")) {
+					ConnectionWindow c = new ConnectionWindow(client);
 				}
 			}
 		});
 		
+		newGameButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				String input = e.getActionCommand();
+				if(input.equals("New Game")) {
+					gamestate.newGame();
+				}
+			}
+		});
 		Box b = Box.createHorizontalBox();
 		Box b2 = Box.createHorizontalBox();
 		Box b3 = Box.createVerticalBox();
@@ -112,6 +120,7 @@ public class GomokuGUI implements Observer{
 		
 		
 	}
+	
 	
 	public void update(Observable arg0, Object arg1) {
 		

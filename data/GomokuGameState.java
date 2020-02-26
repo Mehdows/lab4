@@ -36,6 +36,7 @@ public class GomokuGameState extends Observable implements Observer{
 	 * 
 	 * @param gc The client used to communicate with the other player
 	 */
+	
 	public GomokuGameState(GomokuClient gc){
 		client = gc;
 		client.addObserver(this);
@@ -79,6 +80,7 @@ public class GomokuGameState extends Observable implements Observer{
 			if (gameGrid.move(x, y, gameGrid.ME) == true) {
 				currentState = OTHER_TURN;
 				client.sendMoveMessage(x, y);
+				message = "Waiting for the opponent...";
 				if (gameGrid.isWinner(gameGrid.ME) == true) {
 					currentState = FINNISHED;
 					message = "Game over, you won!";

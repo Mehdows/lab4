@@ -58,7 +58,11 @@ public class GamePanel extends JPanel implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		this.repaint();
 	}
-	
+	/*
+	 * creates rectangles
+	 * 
+	* @param g the graphics class which displays graphics
+	*/
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
@@ -70,7 +74,7 @@ public class GamePanel extends JPanel implements Observer{
 					paintCross(g, x, y, colorCross);
 				}
 				if(grid.getLocation(x, y) == GameGrid.OTHER) {
-					paintCircle(g, x, y, colorCross);
+					paintCircle(g, x, y, colorCircle);
 				}
 		
 			}
@@ -89,7 +93,7 @@ public class GamePanel extends JPanel implements Observer{
 	}
 	private void paintCross(Graphics g, int x, int y, Color c) {
 		g.setColor(c);
-		g.drawLine(x*UNIT_SIZE, y*UNIT_SIZE, x + UNIT_SIZE, y + UNIT_SIZE);
-		g.drawLine(x*UNIT_SIZE, y*UNIT_SIZE, x + UNIT_SIZE, y + UNIT_SIZE);
+		g.drawLine(x*UNIT_SIZE, y*UNIT_SIZE, (x+1)*UNIT_SIZE, (y+1)*UNIT_SIZE);
+		g.drawLine(x*UNIT_SIZE, (y+1)*UNIT_SIZE, (x+1)*UNIT_SIZE, y*UNIT_SIZE );
 	}
 }
