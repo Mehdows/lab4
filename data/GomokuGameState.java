@@ -6,6 +6,9 @@ import java.util.Observer;
 import lab4.client.GomokuClient;
 
 /**
+ * @author Arthur Andersson
+ */
+/**
  * Represents the state of a game
  */
 
@@ -59,8 +62,13 @@ public class GomokuGameState extends Observable implements Observer{
 	/**
 	 * This player makes a move at a specified location
 	 * 
+	 * If the move is possible the game grid is updated
+	 * and the move is passed to the opponent.
+	 * If the move results in a win the game state is updated accordingly.
+	 * 
 	 * @param x the x coordinate
 	 * @param y the y coordinate
+	 * 
 	 */
 	public void move(int x, int y){
 		if (currentState == MY_TURN) {
@@ -82,11 +90,13 @@ public class GomokuGameState extends Observable implements Observer{
 	}
 	/**
 	 * Starts a new game with the current client
+	 * 
+	 * Clears the board and passes the turn to the opponent.
 	 */
 	public void newGame(){
 		gameGrid.clearGrid();
 		currentState = OTHER_TURN;
-		message = "A new game has started, your the oponent goes first.";
+		message = "A new game has started, your the opponent goes first.";
 		client.sendNewGameMessage();
 		setChanged();
 		notifyObservers();
@@ -94,6 +104,8 @@ public class GomokuGameState extends Observable implements Observer{
 	/**
 	 * Other player has requested a new game, so the 
 	 * game state is changed accordingly
+	 * 
+	 * Clears the board and starts the first turn.
 	 */
 	public void receivedNewGame(){
 		gameGrid.clearGrid();
@@ -105,16 +117,20 @@ public class GomokuGameState extends Observable implements Observer{
 	/**
 	 * The connection to the other player is lost, 
 	 * so the game is interrupted
+	 * 
+	 * Clears the board since the opponent is no longer playing.
 	 */
 	public void otherGuyLeft(){
 		gameGrid.clearGrid();
 		currentState = NOT_STARTED;
-		message = "The oponent disconnected.";
+		message = "The opponent disconnected.";
 		setChanged();
 		notifyObservers();
 	}
 	/**
 	 * The player disconnects from the client
+	 * 
+	 * Clears the board and notifies the opponent.
 	 */
 	public void disconnect(){
 		gameGrid.clearGrid();
@@ -126,6 +142,9 @@ public class GomokuGameState extends Observable implements Observer{
 	}
 	/**
 	 * The player receives a move from the other player
+	 * Registers the move made by the opponent on this players board,
+	 * then checks if the opponent has won.
+	 * If not, start a turn.
 	 * 
 	 * @param x The x coordinate of the move
 	 * @param y The y coordinate of the move
@@ -134,7 +153,7 @@ public class GomokuGameState extends Observable implements Observer{
 		gameGrid.move(x, y, gameGrid.OTHER);
 		if (gameGrid.isWinner(gameGrid.OTHER) == true) {
 			currentState = FINNISHED;
-			message = "Game over, the oponent won.";
+			message = "Game over, the opponent won.";
 		} else {
 			currentState = MY_TURN;
 			message = "Your turn.";

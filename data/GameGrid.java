@@ -3,6 +3,12 @@ package lab4.data;
 import java.util.Observable;
 
 /**
+ * @author arthur Andersson
+ */
+/**
+
+ */
+/**
  * Represents the 2-d game grid
  */
 
@@ -45,6 +51,7 @@ public class GameGrid extends Observable{
 	}
 	/**
 	 * Enters a move in the game grid
+	 * If the square is EMPTY the piece is placed and true is returned.
 	 * 
 	 * @param x the x position
 	 * @param y the y position
@@ -63,6 +70,8 @@ public class GameGrid extends Observable{
 	}
 	/**
 	 * Clears the grid of pieces
+	 * 
+	 * Goes through the grid and changes each square to EMPTY.
 	 */
 	public void clearGrid(){
 		for (int x=0; x<size; x++) {
@@ -75,6 +84,9 @@ public class GameGrid extends Observable{
 	}
 	/**
 	 * Check if a player has 5 in row
+	 * Goes through the grid diagonally, horizontally and vertically.
+	 * If it finds pieces placed in a row equal to the INROW constant,
+	 * the method returns true.
 	 * 
 	 * @param player the player to check for
 	 * @return true if player has 5 in row, false otherwise
