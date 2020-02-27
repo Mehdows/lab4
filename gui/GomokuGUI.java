@@ -60,7 +60,7 @@ public class GomokuGUI implements Observer{
 		frame.setSize(g.DEFAULT_SIZE*GamePanel.UNIT_SIZE+100, gamestate.DEFAULT_SIZE*GamePanel.UNIT_SIZE+100);
 		frame.setTitle("Gomoku");
 		frame.setVisible(true);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		
 		GamePanel gameGridPanel = new GamePanel(GomokuGameState.getGameGrid());
 		MouseAdapter mouseListener = new MouseAdapter() {

@@ -19,7 +19,7 @@ public class GameGrid extends Observable{
 	public static final int ME = 1;
 	public static final int OTHER = 2;
 	
-	public static final int INROW = 5;
+	public static final int INROW = 3;
 	private int[][] gameGrid;
 	private int size;
 	
